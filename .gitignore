@@ -1,0 +1,7 @@
+#API Keys
+.env
+
+#Next and npm packages
+/.next
+/node_modules
+next-env.d.ts
