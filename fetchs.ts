@@ -1,4 +1,4 @@
-import { I_KMDbResult, I_KobisResult } from "./movieapp-types";
+import { I_KMDbResult, I_KobisResult, I_MovieInfoResult } from "./movieapp-types";
 
 interface I_KMDBData_props {
     movieNm?: string;
@@ -108,9 +108,7 @@ export async function GetMoviesData(){
             movieNm: data.movieNm,
             openDt: data.openDt,
             audiAcc: data.audiAcc,
-            plots: KMDbData.plots,
             posters: KMDbData.posters,
-            stills: KMDbData.stills
         };
 
         return Format;
@@ -130,7 +128,22 @@ export async function GetMovieDetails(movieId: string){
         , {cache: "no-store"}
     );
 
-    const resp = await DetailFetch.json();
+    const resp = await DetailFetch.json() as I_MovieInfoResult;
 
-    return resp;
+    const Details = resp.movieInfoResult.movieInfo;
+
+    const KMDbData = await GetKMDBData({
+        movieNm: Details.movieNm,
+        openDt: Details.openDt
+    }).then((value) => value);
+
+    const Result: I_MoviesData = {
+        movieId: Details.movieCd,
+        movieNm: Details.movieNm,
+        openDt: Details.openDt,
+        plots: KMDbData.plots,
+        stills: KMDbData.stills
+    };
+
+    return Result;
 };

@@ -12,12 +12,21 @@ async function DetailPage({params}){
 
     const MovieDetailData = await GetMovieDetails(movieId);
 
-    console.log(MovieDetailData);
-
     return (
         <div>
             <h3>Detail Page</h3>
-            <h4>MovieId: {movieId}</h4>
+            <h4>MovieNm: {MovieDetailData.movieNm}</h4>
+            <ul>
+                {
+                    MovieDetailData.stills.map((imgURL, idx) => {
+                        return (
+                            <li key={`img${idx}`}>
+                                <img src={imgURL} width={"100"} />
+                            </li>
+                        );
+                    })
+                }
+            </ul>
             <Link href="/">Home</Link>
         </div>
     );
