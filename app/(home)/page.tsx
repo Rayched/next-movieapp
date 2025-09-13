@@ -12,9 +12,10 @@ export default async function HomePage(){
                     Test.map((data) => {
                         return (
                             <li key={data.movieId}>
-                                <img src={data.posters[0]} width={"100"}/>
-                                {data.movieNm}
-                                <Link href={`/detail/${data.movieId}`}>Detail</Link>
+                                <Link href={`/movies/${data.movieId}`}>
+                                    <img src={data.posters[0]} width={"100"}/>
+                                    {data.movieNm}
+                                </Link>
                             </li>
                         );
                     })

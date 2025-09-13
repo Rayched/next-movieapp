@@ -15,17 +15,19 @@ async function DetailPage({params}){
     return (
         <div>
             <h3>Detail Page</h3>
-            <h4>MovieNm: {MovieDetailData.movieNm}</h4>
+            <h4>{MovieDetailData.movieNm}</h4>
             <ul>
-                {
-                    MovieDetailData.stills.map((imgURL, idx) => {
+               {
+                MovieDetailData.vods.map((urls, idx) => {
                         return (
-                            <li key={`img${idx}`}>
-                                <img src={imgURL} width={"100"} />
+                            <li key={`video${idx}`}>
+                                <Link href={urls}>
+                                    예고편 {idx + 1}
+                                </Link>
                             </li>
                         );
-                    })
-                }
+                })
+               } 
             </ul>
             <Link href="/">Home</Link>
         </div>

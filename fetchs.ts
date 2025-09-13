@@ -9,6 +9,7 @@ export interface I_DetailData {
     plots?: string;
     stills?: string[];
     posters?: string[];
+    vods?: string[];
 };
 
 interface I_MoviesData {
@@ -20,6 +21,7 @@ interface I_MoviesData {
     audiAcc?: string;
     posters?: string[];
     stills?: string[];
+    vods?: string[];
 };
 
 const GetTargetDts = () => {
@@ -57,10 +59,15 @@ async function GetKMDBData({movieNm, openDt}: I_KMDBData_props){
 
     const GetDetail = await Resp.Data[0].Result[0];
 
+    const Vods = await GetDetail.vods.vod.map((data) => {
+        return data.vodUrl;
+    });
+
     const DetailData: I_DetailData = {
         posters: GetDetail.posters.split("|"),
         plots: GetDetail.plots.plot[0].plotText,
-        stills: GetDetail.stlls.split("|")
+        stills: GetDetail.stlls.split("|"),
+        vods: Vods
     };
 
     return DetailData;
@@ -103,12 +110,12 @@ export async function GetMoviesData(){
         ).then();
 
         const Format: I_MoviesData = {
-            rank: data.rank,
-            movieId: data.movieCd,
-            movieNm: data.movieNm,
-            openDt: data.openDt,
-            audiAcc: data.audiAcc,
-            posters: KMDbData.posters,
+            rank: data.rank, //박스오피스 순위
+            movieId: data.movieCd, //영화 id (movies page 필요)
+            movieNm: data.movieNm, //영화 제목
+            openDt: data.openDt, //영화 개봉일
+            audiAcc: data.audiAcc, //누적 관객 수
+            posters: KMDbData.posters, //영화 포스터's
         };
 
         return Format;
@@ -142,7 +149,8 @@ export async function GetMovieDetails(movieId: string){
         movieNm: Details.movieNm,
         openDt: Details.openDt,
         plots: KMDbData.plots,
-        stills: KMDbData.stills
+        stills: KMDbData.stills,
+        vods: KMDbData.vods
     };
 
     return Result;
