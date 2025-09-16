@@ -2,8 +2,8 @@ import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import { GetMoviesData } from "../../src/fetchs";
 import GetNowDate from "../../src/GetNowDate";
-import Movies from "./components/MovieList";
-import MovieList from "./components/MovieList";
+import Movies from "../../components/Home/MovieList";
+import MovieList from "../../components/Home/MovieList";
 
 export default async function HomePage(){
     const GetTargetDt = GetNowDate();

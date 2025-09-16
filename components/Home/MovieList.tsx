@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react";
-import { I_MoviesData } from "../../../src/fetchs";
+import { I_MoviesData } from "../../src/fetchs";
 
 type MoviesListProps = {
     Movies: I_MoviesData[];
