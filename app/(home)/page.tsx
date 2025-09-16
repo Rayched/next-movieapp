@@ -1,26 +1,23 @@
 import Link from "next/link";
-import { GetMoviesData } from "../../fetchs";
+import styles from "../styles/Home.module.css";
+import { GetMoviesData } from "../../src/fetchs";
+import GetNowDate from "../../src/GetNowDate";
+import Movies from "./components/MovieList";
+import MovieList from "./components/MovieList";
 
 export default async function HomePage(){
-    const Test = await GetMoviesData();
+    const GetTargetDt = GetNowDate();
+    const TargetDt = GetTargetDt.DateInfos.join("-");
+    const DayText = GetTargetDt.DayInfos;
+    const MoviesData = await GetMoviesData();
 
     return (
-        <div>
-            <h4>Hello World</h4>
-            <ul>
-                {
-                    Test.map((data) => {
-                        return (
-                            <li key={data.movieId}>
-                                <Link href={`/movies/${data.movieId}`}>
-                                    <img src={data.posters[0]} width={"100"}/>
-                                    {data.movieNm}
-                                </Link>
-                            </li>
-                        );
-                    })
-                }
-            </ul>
+        <div className={styles.HomeWrapper}>
+            <div className={styles.HomeTitle}>
+                <h3>영화 목록</h3>
+                <h3>기준 일: {`${TargetDt} (${DayText})`}</h3>
+            </div>
+            <MovieList Movies={MoviesData}/>
         </div>
     );
 }

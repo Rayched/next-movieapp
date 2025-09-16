@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { GetMovieDetails } from "../../../fetchs";
+import { GetMovieDetails } from "../../../src/fetchs";
 
 interface I_DetailPageProps {
     plots: string;
@@ -18,18 +18,17 @@ async function DetailPage({params}){
             <h4>{MovieDetailData.movieNm}</h4>
             <ul>
                {
-                MovieDetailData.vods.map((urls, idx) => {
-                        return (
-                            <li key={`video${idx}`}>
-                                <Link href={urls}>
-                                    예고편 {idx + 1}
-                                </Link>
-                            </li>
-                        );
-                })
+                    MovieDetailData.vods.map((urls, idx) => {
+                            return (
+                                <li key={`video${idx}`}>
+                                    <Link href={urls}>
+                                        예고편 {idx + 1}
+                                    </Link>
+                                </li>
+                            );
+                    })
                } 
             </ul>
-            <Link href="/">Home</Link>
         </div>
     );
 };

@@ -1,0 +1,33 @@
+/* "/(Home)" CSS Module's*/
+
+.Wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100dvw;
+    height: 100dvh;
+
+    && header {
+        width: 100%;
+        height: 5%;
+        padding: 10px 0px;
+        font-size: 18px;
+        font-weight: bold;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        a {
+            color: white;
+            text-decoration: none;
+        };
+
+        a:hover {
+            color: rgb(189, 189, 189);
+        };
+    };
+
+    && main {
+        width: 100%;
+        height: 95%;
+    };
+};

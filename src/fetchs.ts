@@ -1,3 +1,4 @@
+import GetNowDate from "./GetNowDate";
 import { I_KMDbResult, I_KobisResult, I_MovieInfoResult } from "./movieapp-types";
 
 interface I_KMDBData_props {
@@ -12,7 +13,7 @@ export interface I_DetailData {
     vods?: string[];
 };
 
-interface I_MoviesData {
+export interface I_MoviesData {
     rank?: string;
     movieId?: string;
     movieNm?: string;
@@ -22,28 +23,6 @@ interface I_MoviesData {
     posters?: string[];
     stills?: string[];
     vods?: string[];
-};
-
-const GetTargetDts = () => {
-    //'0' 형식 → '00' 형식으로 변환
-    const Modifys = (target: number) => {
-        if(target > 9){
-            return String(target);
-        } else {
-            const Edits = "0" + String(target);
-            return Edits;
-        }
-    };
-
-    const NowDate = new Date();
-
-    const FullYears = String(NowDate.getFullYear());
-    const Month = Modifys(NowDate.getMonth() + 1);
-    const Dates = Modifys(NowDate.getDate() - 1);
-
-    const TargetDt = FullYears + Month + Dates;
-
-    return TargetDt;
 };
 
 //KMDb, 영화 상세정보 api data fetch
@@ -93,7 +72,7 @@ const KobisKey = process.env.NEXT_PUBLIC_KOBIS_API_KEY;
  */
 export async function GetMoviesData(){
     const DailyBoxOffice_URL = `${Kobis_basedURL}/boxoffice/searchDailyBoxOfficeList.json`;
-    const TargetDt = GetTargetDts();
+    const TargetDt = GetNowDate().DateInfos.join("");
 
     const MoviesFetch = await fetch(
         `${DailyBoxOffice_URL}?key=${KobisKey}&targetDt=${TargetDt}`
@@ -121,7 +100,7 @@ export async function GetMoviesData(){
         return Format;
     })
 
-    const Result = Promise.all(MoviesData).then((value) => value);
+    const Result = Promise.all(MoviesData);
 
     return Result;
 };
