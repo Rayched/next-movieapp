@@ -7,6 +7,7 @@ interface I_MovieCardProps {
     movieNm?: string;
     posterUrl?: string;
     audiAcc?: string;
+    isNext: boolean;
 };
 
 const MovieCard_Container = styled(motion.div)`
@@ -26,38 +27,48 @@ const MoviePoster = styled.img`
     display: block;
     padding: 3px 0px;
     margin: 2px 0px;
-    width: 170px;
-    height: 220px;
+    width: 14em;
+    height: 17em;
 `;
 
-const MovieInfoBox = styled.div``;
+const MovieInfoBox = styled.div`
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+`;
 
-const MovieCard_Variants = {
+const PrevVariants = {
+    initial: { x: -100},
+    animate: { x: 0, transition: {duration: 0.6}},
+    exit: {
+        x: 100
+    }
+};
+
+const Next_Variants = {
     initial: {
-        x: 100,
-        transition: {
-            delay: 0.5
-        }
+        x: 100
     },
     animate: {
         x: 0,
         transition: {
-            duration: 0.3
+            duration: 0.6
         }
     },
     exit: {
         x: -100,
         transition: {
-            duration: 0.4
+            delay: 1,
+            duration: 0.5
         }
     }
 };
 
-function MovieCard({movieId, movieNm, posterUrl, audiAcc}: I_MovieCardProps){
+function MovieCard({movieId, movieNm, posterUrl, audiAcc, isNext}: I_MovieCardProps){
     return (
         <AnimatePresence>
             <MovieCard_Container 
-                variants={MovieCard_Variants}
+                variants={isNext ? Next_Variants : PrevVariants}
                 initial="initial"
                 animate="animate"
                 exit="exit"
@@ -67,7 +78,7 @@ function MovieCard({movieId, movieNm, posterUrl, audiAcc}: I_MovieCardProps){
                 </Link>
                 <MovieInfoBox>
                     <h4>{movieNm}</h4>
-                    <h4>누적: {audiAcc}</h4>
+                    <h4>누적 관객 {audiAcc}명</h4>
                 </MovieInfoBox>
             </MovieCard_Container>
         </AnimatePresence>
