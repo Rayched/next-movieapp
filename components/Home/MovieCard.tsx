@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styled from "styled-components";
 
 interface I_MovieCardProps {
@@ -30,7 +31,9 @@ const MovieInfoBox = styled.div``;
 function MovieCard({movieId, movieNm, posterUrl, audiAcc}: I_MovieCardProps){
     return (
         <MovieCard_Container key={movieId}>
-            <MoviePoster src={posterUrl}/>
+            <Link href={`/movies/${movieId}`}>
+                <MoviePoster src={posterUrl}/>
+            </Link>
             <MovieInfoBox>
                 <h4>{movieNm}</h4>
                 <h4>누적: {audiAcc}</h4>
