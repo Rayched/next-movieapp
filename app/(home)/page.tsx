@@ -14,10 +14,12 @@ export default async function HomePage(){
     return (
         <div className={styles.HomeWrapper}>
             <div className={styles.HomeTitle}>
-                <h3>일일 박스오피스 목록</h3>
-                <h3>기준 일: {`${TargetDt} (${DayText})`}</h3>
+                <h3>{`${TargetDt} (${DayText})`}</h3>
+                <h4>일일 박스오피스</h4>
             </div>
-            <MovieList Movies={MoviesData}/>
+            <div className={styles.HomeMoviesListBox}>
+                <MovieList Movies={MoviesData} />
+            </div>
         </div>
     );
 }

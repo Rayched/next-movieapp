@@ -15,8 +15,8 @@ const MovieListContainer = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 500px;
-    height: 370px;
+    width: 98%;
+    height: 85%;
     margin-top: 5px;
 `;
 
@@ -25,20 +25,21 @@ const MovieBtn = styled.div`
     justify-content: center;
     align-items: center;
     width: 40px;
-    height: 100%;
+    height: 78%;
+    min-height: 350px;
     color: white;
     background-color: rgba(0, 0, 0, 0.8);
-    margin: 0px 3px;
 `;
 
 const MovieBox = styled.div`
     width: 440px;
-    height: 100%;
+    height: 78%;
+    min-height: 350px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 3px;
     background-color: rgb(190, 190, 190);
+    position: relative;
 `;
 
 export default function MovieList({Movies}: MoviesListProps){

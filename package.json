@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "framer-motion": "^12.23.14",
     "next": "^15.5.2",
     "next-videos": "^1.4.1",
     "react": "^19.1.1",

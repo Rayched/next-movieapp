@@ -36,7 +36,7 @@ async function GetKMDBData({movieNm, openDt}: I_KMDBData_props){
 
     const Resp = await DetailFetch.json() as I_KMDbResult;
 
-    const GetDetail = await Resp.Data[0].Result[0];
+    const GetDetail = await Resp?.Data[0]?.Result[0];
 
     const Vods = await GetDetail.vods.vod.map((data) => {
         return data.vodUrl;
