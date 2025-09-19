@@ -1,5 +1,9 @@
 import Link from "next/link";
 import { GetMovieDetails } from "../../../src/fetchs";
+import styles from "../../styles/Movies.module.css"
+import MovieVideo from "../../../components/movies/movie-videos";
+import MoviesHeader from "../../../components/movies/MoviesHeader";
+import MoviesInfo from "../../../components/movies/MoviesInfo";
 
 interface I_DetailPageProps {
     plots: string;
@@ -10,25 +14,24 @@ interface I_DetailPageProps {
 async function DetailPage({params}){
     const {movieId} = await params;
 
-    const MovieDetailData = await GetMovieDetails(movieId);
+    const Details = await GetMovieDetails(movieId);
+
+    console.log(Details);
 
     return (
-        <div>
-            <h3>Detail Page</h3>
-            <h4>{MovieDetailData.movieNm}</h4>
-            <ul>
-               {
-                    MovieDetailData.vods.map((urls, idx) => {
-                            return (
-                                <li key={`video${idx}`}>
-                                    <Link href={urls}>
-                                        예고편 {idx + 1}
-                                    </Link>
-                                </li>
-                            );
-                    })
-               } 
-            </ul>
+        <div className={styles.MoviesWrapper}>
+            <h4 className={styles.PageText}>영화 상세정보</h4>
+            <MoviesHeader 
+                movieNm={Details.movieNm} 
+                poster={Details.posters[0]}
+                openDt={Details.openDt}
+                showTm={Details.showTm}
+            />
+            <MoviesInfo 
+                director={Details.directorNm}
+                actors={Details.actors}
+                genres={Details.genres}
+            />
         </div>
     );
 };

@@ -6,23 +6,39 @@ interface I_KMDBData_props {
     openDt?: string;
 };
 
-export interface I_DetailData {
+export interface I_KmdbRespTypes {
     plots?: string;
     stills?: string[];
     posters?: string[];
     vods?: string[];
 };
 
+//Home, Fetch 함수 return type
 export interface I_MoviesData {
     rank?: string;
     movieId?: string;
     movieNm?: string;
     openDt?: string;
-    plots?: string;
     audiAcc?: string;
     posters?: string[];
-    stills?: string[];
-    vods?: string[];
+};
+
+//Movies page, Fetch 함수 return type
+export interface I_MovieDetailData {
+    //Kobis 영화 상세정보 api type
+    movieId: string;
+    movieNm: string;
+    openDt: string;
+    showTm: string;
+    genres: string[];
+    actors: string[];
+    directorNm: string;
+
+    //Kmdb 영화 상세정보 api Responce type
+    plots: string;
+    posters: string[];
+    stills: string[];
+    vods: string[];
 };
 
 //KMDb, 영화 상세정보 api data fetch
@@ -42,7 +58,7 @@ async function GetKMDBData({movieNm, openDt}: I_KMDBData_props){
         return data.vodUrl;
     });
 
-    const DetailData: I_DetailData = {
+    const DetailData: I_KmdbRespTypes = {
         posters: GetDetail.posters.split("|"),
         plots: GetDetail.plots.plot[0].plotText,
         stills: GetDetail.stlls.split("|"),
@@ -118,18 +134,29 @@ export async function GetMovieDetails(movieId: string){
 
     const Details = resp.movieInfoResult.movieInfo;
 
+    //Kobis 영화 상세정보 api data 일부 가공
+    const Genres = Details.genres.map((data) => data.genreNm);
+    const Actors = Details.actors.map((data) => data.peopleNm);
+
     const KMDbData = await GetKMDBData({
         movieNm: Details.movieNm,
         openDt: Details.openDt
     }).then((value) => value);
 
-    const Result: I_MoviesData = {
+    const Result: I_MovieDetailData = {
+        //Kobis, 영화 상세정보 api return 값
         movieId: Details.movieCd,
         movieNm: Details.movieNm,
         openDt: Details.openDt,
+        showTm: Details.showTm,
+        directorNm: Details.directors[0].peopleNm,
+        genres: Genres,
+        actors: Actors,
+        //Kmdb, 영화 상세정보 api return 값
+        posters: KMDbData.posters,
         plots: KMDbData.plots,
         stills: KMDbData.stills,
-        vods: KMDbData.vods
+        vods: KMDbData.vods,
     };
 
     return Result;
