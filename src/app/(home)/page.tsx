@@ -1,5 +1,5 @@
 
-import styles from "../styles/Home.module.css";
+import styles from "../styles/home/Home.module.css";
 import MovieList from "../../components/Home/MovieList";
 import GetNowDate from "../../fetchs/GetNowDate";
 import { GetMoviesData } from "../../fetchs/fetchs";

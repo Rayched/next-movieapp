@@ -1,6 +1,4 @@
-import Link from "next/link";
 import styles from "../../styles/movies/Movies.module.css";
-import HeaderStyles from "../../styles/movies/MoviesHeader.module.css";
 import MoviesHeader from "../../../components/movies/MoviesHeader";
 import { GetMovieDetails } from "../../../fetchs/fetchs";
 import MoviesInfo from "../../../components/movies/MoviesInfo";
@@ -28,7 +26,7 @@ async function DetailPage({params}){
 
     return (
         <div className={styles.MoviesWrapper}>
-            <h4 className={styles.PageText}>영화 상세정보</h4>
+            <div className={styles.PageText}>영화 상세정보</div>
             <MoviesHeader 
                 movieNm={Details.movieNm}
                 openDt={Details.openDt}
