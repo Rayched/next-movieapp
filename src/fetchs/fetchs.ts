@@ -1,5 +1,5 @@
 import GetNowDate from "./GetNowDate";
-import { I_KMDbResult, I_KobisResult, I_MovieInfoResult } from "./movieapp-types";
+import { I_KMDbResult, I_KobisResult, I_MovieInfoResult } from "../movieapp-types";
 
 interface I_KMDBData_props {
     movieNm?: string;

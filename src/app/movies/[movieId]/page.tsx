@@ -1,14 +1,22 @@
 import Link from "next/link";
-import { GetMovieDetails } from "../../../src/fetchs";
-import styles from "../../styles/Movies.module.css"
-import MovieVideo from "../../../components/movies/movie-videos";
+import styles from "../../styles/movies/Movies.module.css";
+import HeaderStyles from "../../styles/movies/MoviesHeader.module.css";
 import MoviesHeader from "../../../components/movies/MoviesHeader";
+import { GetMovieDetails } from "../../../fetchs/fetchs";
 import MoviesInfo from "../../../components/movies/MoviesInfo";
 
 interface I_DetailPageProps {
     plots: string;
     posters: string[];
     stills: string[];
+};
+
+const OpenDtsEdit = (OpenDt?: string) => {
+    const Year = OpenDt.slice(0, 4);
+    const Month = OpenDt.slice(4, 6);
+    const Dates = OpenDt.slice(6);
+    
+    return `${Year}.${Month}.${Dates}`;
 };
 
 async function DetailPage({params}){
@@ -22,15 +30,15 @@ async function DetailPage({params}){
         <div className={styles.MoviesWrapper}>
             <h4 className={styles.PageText}>영화 상세정보</h4>
             <MoviesHeader 
-                movieNm={Details.movieNm} 
-                poster={Details.posters[0]}
+                movieNm={Details.movieNm}
                 openDt={Details.openDt}
                 showTm={Details.showTm}
+                poster={Details.posters[0]}
             />
             <MoviesInfo 
                 director={Details.directorNm}
-                actors={Details.actors}
                 genres={Details.genres}
+                actors={Details.actors}
             />
         </div>
     );

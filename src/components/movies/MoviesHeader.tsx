@@ -1,13 +1,5 @@
 "use client"
-
 import styled from "styled-components";
-
-interface MoviesHeaderProps {
-    movieNm: string;
-    poster: string;
-    openDt: string;
-    showTm: string;
-};
 
 const Container = styled.div`
     width: 85%;
@@ -18,43 +10,50 @@ const Container = styled.div`
     align-items: center;
     padding: 1px 5px;
     border-bottom: 2px solid rgb(187, 187, 187);
+
+    img {
+        display: block;
+        width: 65px;
+        height: 80px;
+    };
 `;
 
-const PosterBox = styled.img`
-    display: block;
-    width: 65px;
-    height: 80px;
-`;
-
-const MovieInfoBox = styled.div`
+const MovieTitle = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     padding: 0px 3px;
     margin-left: 5px;
+
+    .infos {
+        font-size: 17px;
+        font-weight: bold;
+        padding: 3px 0px;
+        margin: 2px 0px;
+    };
 `;
 
-const Infos = styled.div`
-    font-size: 17px;
-    font-weight: bold;
-    padding: 3px 0px;
-    margin: 2px 0px;
-`;
+interface MoviesHeaderProps {
+    movieNm: string;
+    poster: string;
+    openDt: string;
+    showTm: string;
+};
 
 function MoviesHeader({movieNm, poster, openDt, showTm}: MoviesHeaderProps){
     const Year = openDt.slice(0, 4);
     const Month = openDt.slice(4, 6);
     const Dates = openDt.slice(6);
 
-    const TestDates = `${Year}.${Month}.${Dates}`;
+    const EditDts = `${Year}.${Month}.${Dates}`;
 
     return (
         <Container>
-            <PosterBox src={poster} />
-            <MovieInfoBox>
-                <Infos>{movieNm}</Infos>
-                <Infos>{TestDates} 개봉 / {showTm}분</Infos>
-            </MovieInfoBox>
+            <img src={poster} />
+            <MovieTitle>
+                <h4 className="infos">{movieNm}</h4>
+                <h4 className="infos">개봉 {EditDts} / {showTm}분</h4>
+            </MovieTitle>
         </Container>
     );
 };

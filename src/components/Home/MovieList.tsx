@@ -1,7 +1,7 @@
 "use client"
 
 import styled from "styled-components";
-import { I_MoviesData } from "../../src/fetchs";
+import { I_MoviesData } from "../../src/fetchs/fetchs";
 import MovieCard from "./MovieCard";
 import { useState } from "react";
 import Link from "next/link";

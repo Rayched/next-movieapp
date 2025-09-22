@@ -1,8 +1,8 @@
 
 import styles from "../styles/Home.module.css";
-import { GetMoviesData } from "../../src/fetchs";
-import GetNowDate from "../../src/GetNowDate";
 import MovieList from "../../components/Home/MovieList";
+import GetNowDate from "../../fetchs/GetNowDate";
+import { GetMoviesData } from "../../fetchs/fetchs";
 
 export default async function HomePage(){
     const GetTargetDt = GetNowDate();
