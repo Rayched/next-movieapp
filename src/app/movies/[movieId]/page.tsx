@@ -1,5 +1,6 @@
 import { GetMovieDetails } from "../../../fetchs/fetchs";
 import styles from "../../styles/movies/Movies.module.css";
+import MoviesContents from "./MoviesContents";
 
 const GetEditDts = (openDt?: string) => {
     const Year = openDt.slice(0, 4);
@@ -28,6 +29,9 @@ async function MoviesPage({params}){
                     </div>
                 </div>
             </header>
+            <main>
+                <MoviesContents />
+            </main>
         </div>
     );
 }
