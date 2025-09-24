@@ -12,7 +12,7 @@ const GetEditDts = (openDt?: string) => {
 
 async function MoviesPage({params}){
     const {movieId} = params;
-    const DetailData = await GetMovieDetails(movieId);
+    const DetailData = await GetMovieDetails(String(movieId));
 
     const EditDts = GetEditDts(DetailData.openDt);
     
@@ -30,7 +30,7 @@ async function MoviesPage({params}){
                 </div>
             </header>
             <main>
-                <MoviesContents />
+                <MoviesContents movieData={DetailData}/>
             </main>
         </div>
     );
