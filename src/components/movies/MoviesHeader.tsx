@@ -1,4 +1,4 @@
-import styles from "../../app/styles/movies/Header.module.css";
+import styles from "../../app/styles/movies/MoviesHeader.module.css";
 
 interface MoviesHeaderProps {
     movieNm: string;
