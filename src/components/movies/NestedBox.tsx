@@ -38,17 +38,12 @@ const NestedBtn = styled.div<I_NestedBtn>`
     }
 `;
 
-export default function NestedBtns({movieId}){
+export default function NestedBox(){
     const URLCheck = usePathname();
 
     return (
         <Container>
-            <NestedBtn isStills={URLCheck !== `/movies/${movieId}/movieStills`}>
-                <Link href={`/movies/${movieId}`}>상세 정보</Link>
-            </NestedBtn>
-            <NestedBtn isStills={URLCheck === `/movies/${movieId}/movieStills`}>
-                <Link href={`/movies/${movieId}/movieStills`}>스틸컷</Link>
-            </NestedBtn>
+            
         </Container>
     );
 }

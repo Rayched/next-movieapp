@@ -20,12 +20,12 @@ function RootLayout({children}: {children: React.ReactNode}){
   return (
     <html>
       <body className={styles.Wrapper}>
-        <header>
+        <div className={styles.Title}>
           <Link href={"/"}>Movie App</Link>
-        </header>
-        <main>
+        </div>
+        <div className={styles.MainContents}>
           {children}
-        </main>
+        </div>
       </body>
     </html>
   )
