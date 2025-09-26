@@ -10,7 +10,15 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     margin: 5px 0px;
-    width: 75%;
+    width: 100%;
+`;
+
+const DataLabel = styled.div`
+    width: 85%;
+    padding: 5px 0px;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 3px 0px;
 `;
 
 const InfoContainer = styled.div`
@@ -18,6 +26,7 @@ const InfoContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 85%;
 `;
 
 const InfoBox = styled.div<I_InfoBox>`
@@ -48,6 +57,13 @@ const InfoBody = styled.div`
     background-color: rgb(187, 187, 187);
 `;
 
+const Plots = styled.div`
+    width: 80%;
+    background-color: white;
+    padding: 5px;
+    word-spacing: 3px;
+`;
+
 interface MoviesInfoProps {
     genres: string[];
     actors: string[];
@@ -58,7 +74,7 @@ interface MoviesInfoProps {
 function MoviesInfo({genres, actors, director, plots}: MoviesInfoProps){
     return (
         <Wrapper>
-            <h4>기본 정보</h4>
+            <DataLabel>기본 정보</DataLabel>
             <InfoContainer>
                 <InfoBox InfoBoxPositon="Top">
                     <InfoTitle>감독</InfoTitle>
@@ -73,8 +89,8 @@ function MoviesInfo({genres, actors, director, plots}: MoviesInfoProps){
                     <InfoBody>{actors.join(", ")}</InfoBody>
                 </InfoBox>
             </InfoContainer>
-            <h4>줄거리</h4>
-            <div>{plots}</div>
+            <DataLabel>줄거리</DataLabel>
+            <Plots>{plots}</Plots>
         </Wrapper>
     );
 };

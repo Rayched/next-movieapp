@@ -1,5 +1,5 @@
 import GetNowDate from "./GetNowDate";
-import { I_KMDbResult, I_KobisResult, I_MovieInfoResult } from "../movieapp-types";
+import { I_KMDbResult, I_KobisResult, I_MovieInfoResult } from "./movieapp-types"
 
 interface I_KMDBData_props {
     movieNm?: string;
@@ -149,7 +149,7 @@ export async function GetMovieDetails(movieId: string){
         movieNm: Details.movieNm,
         openDt: Details.openDt,
         showTm: Details.showTm,
-        directorNm: Details.directors[0].peopleNm,
+        directorNm: Details.directors[0]?.peopleNm,
         genres: Genres,
         actors: Actors,
         //Kmdb, 영화 상세정보 api return 값

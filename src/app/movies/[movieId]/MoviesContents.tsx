@@ -1,9 +1,10 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { I_MovieDetailData } from "../../../fetchs/fetchs";
 import MoviesInfo from "../../../components/movies/MoviesInfo";
+import MovieTrailers from "../../../components/movies/MovieTrailers";
 
 interface I_NestedBtn {
     actives: boolean;
@@ -31,7 +32,7 @@ const NestedBtn = styled.div<I_NestedBtn>`
     padding: 5px 7px;
     font-weight: bold;
     text-align: center;
-    background-color: ${(props) => props.actives ? "rgb(223, 230, 233)" : "rgb(178, 190, 195)"};
+    background-color: ${(props) => props.actives ? "rgb(178, 190, 195)" :"rgb(223, 230, 233)" };
     border-top-right-radius: 15px;
 `;
 
@@ -48,28 +49,52 @@ const ContentsArea = styled.div`
 `;
 
 function MoviesContents({movieData}: {movieData: I_MovieDetailData}){
-    const [isActive, setActive] = useState(true);
+    const [isInfos, setInfos] = useState(true);
+    const [isTrailers, setTrailers] = useState(false);
 
-    const NestedChange = () => {
-        setActive((prev) => !prev);
+    const NestedChange = (BtnNm: string) => {
+        if(BtnNm === "TrailerBtn"){
+            setInfos(false);
+            setTrailers(true);
+        } else if(BtnNm === "InfoBtn"){
+            setInfos(true);
+            setTrailers(false);
+        }
     };
+
+    useEffect(() => {
+        setInfos(true);
+        setTrailers(false);
+    }, []);
 
     return (
         <Container>
             <NestedBtnBox>
-                <NestedBtn actives={!isActive} onClick={NestedChange}>상세 정보</NestedBtn>
-                <NestedBtn actives={isActive} onClick={NestedChange}>영화 스틸컷</NestedBtn>
+                <NestedBtn actives={Boolean(isInfos)} onClick={() => NestedChange("InfoBtn")}>
+                    상세 정보
+                </NestedBtn>
+                <NestedBtn actives={Boolean(isTrailers)} onClick={() => NestedChange("TrailerBtn")}>
+                    스틸컷 / 예고편
+                </NestedBtn>
             </NestedBtnBox>
             <ContentsArea>
                 {
-                    isActive ? (
+                    isInfos ? (
                         <MoviesInfo 
                             genres={movieData.genres}
                             actors={movieData.actors}
                             director={movieData.directorNm}
                             plots={movieData.plots}
                         />
-                    ): "영화 스틸컷"
+                    ): null
+                }
+                {
+                    isTrailers ? (
+                        <MovieTrailers 
+                            StillCuts={movieData.stills}
+                            Trailers={movieData.vods}
+                        /> 
+                    ): null
                 }
             </ContentsArea>
         </Container>

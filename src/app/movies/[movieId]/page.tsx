@@ -1,6 +1,8 @@
+import { Params } from "next/dist/server/request/params";
 import { GetMovieDetails } from "../../../fetchs/fetchs";
 import styles from "../../styles/movies/Movies.module.css";
 import MoviesContents from "./MoviesContents";
+import Link from "next/link";
 
 const GetEditDts = (openDt?: string) => {
     const Year = openDt.slice(0, 4);
@@ -10,7 +12,7 @@ const GetEditDts = (openDt?: string) => {
     return `${Year}.${Month}.${Dates}`;
 };
 
-async function MoviesPage({params}){
+async function MoviesPage({params}: {params: Params}){
     const {movieId} = params;
     const DetailData = await GetMovieDetails(String(movieId));
 
@@ -30,7 +32,9 @@ async function MoviesPage({params}){
                 </div>
             </header>
             <main>
-                <MoviesContents movieData={DetailData}/>
+                <MoviesContents 
+                    movieData={DetailData}
+                />
             </main>
         </div>
     );
