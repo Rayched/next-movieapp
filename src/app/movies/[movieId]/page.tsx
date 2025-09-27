@@ -12,7 +12,7 @@ const GetEditDts = (openDt?: string) => {
     return `${Year}.${Month}.${Dates}`;
 };
 
-async function MoviesPage({params}: {params: Params}){
+async function MoviesPage({params}){
     const {movieId} = params;
     const DetailData = await GetMovieDetails(String(movieId));
 
