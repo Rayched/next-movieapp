@@ -1,7 +1,8 @@
 "use client"
 import styled from "styled-components";
 import {AnimatePresence, motion} from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 
 interface MovieTrailersProps {
     StillCuts: string[];
@@ -99,6 +100,17 @@ const TrailerItem = styled(motion.div)`
     &:hover {
         scale: 1.2;
     };
+    a {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        font-weight: bold;
+        color: black;
+        text-decoration: none;
+    };
 `;
 
 const ShowBoxWrapper = styled.div`
@@ -170,6 +182,10 @@ function MovieTrailers({StillCuts, Trailers}: MovieTrailersProps){
         SetShowStillCuts(false);
     };
 
+    useEffect(() => {
+        console.log(Trailers);
+    }, []);
+
     return (
         <>
             <Container>
@@ -200,14 +216,20 @@ function MovieTrailers({StillCuts, Trailers}: MovieTrailersProps){
                     <TrailerBox key="TrailerSlider">
                         {
                             Trailers.slice(TrailerIdx * 3, TrailerIdx * 3 + 3).map((data, idx) => {
-                                return (
-                                    <TrailerItem key={`Trailer_${idx}`}>
-                                        <h4>예고편 {idx + 1}</h4>
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="70" width="80" viewBox="0 0 640 640">
-                                            <path fill="#b2bec3" d="M187.2 100.9C174.8 94.1 159.8 94.4 147.6 101.6C135.4 108.8 128 121.9 128 136L128 504C128 518.1 135.5 531.2 147.6 538.4C159.7 545.6 174.8 545.9 187.2 539.1L523.2 355.1C536 348.1 544 334.6 544 320C544 305.4 536 291.9 523.2 284.9L187.2 100.9z"/>
-                                        </svg>
-                                    </TrailerItem>
-                                );
+                                if(data === ""){
+                                    return null;
+                                } else {
+                                    return (
+                                        <TrailerItem key={`Trailer_${idx}`}>
+                                            <Link href={data} target="-blank">
+                                                <h4>예고편 {idx + 1}</h4>
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="70" width="80" viewBox="0 0 640 640">
+                                                    <path fill="#b2bec3" d="M187.2 100.9C174.8 94.1 159.8 94.4 147.6 101.6C135.4 108.8 128 121.9 128 136L128 504C128 518.1 135.5 531.2 147.6 538.4C159.7 545.6 174.8 545.9 187.2 539.1L523.2 355.1C536 348.1 544 334.6 544 320C544 305.4 536 291.9 523.2 284.9L187.2 100.9z"/>
+                                                </svg>
+                                            </Link>
+                                        </TrailerItem>
+                                    );
+                                }
                             })
                         }
                     </TrailerBox>

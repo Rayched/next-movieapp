@@ -2,7 +2,7 @@
 import styled from "styled-components";
 
 interface I_InfoBox  {
-    InfoBoxPositon: string;
+    infoboxposition: string;
 };
 
 const Wrapper = styled.div`
@@ -34,7 +34,7 @@ const InfoBox = styled.div<I_InfoBox>`
     display: flex;
     flex-direction: row;
     border: 2px solid black;
-    border-bottom: ${(props) => props.InfoBoxPositon === "Bottom" ? "2px solid black" : "none"};
+    border-bottom: ${(props) => props.infoboxposition === "Bottom" ? "2px solid black" : "none"};
 `;
 
 const InfoTitle = styled.div`
@@ -76,15 +76,15 @@ function MoviesInfo({genres, actors, director, plots}: MoviesInfoProps){
         <Wrapper>
             <DataLabel>기본 정보</DataLabel>
             <InfoContainer>
-                <InfoBox InfoBoxPositon="Top">
+                <InfoBox infoboxposition="Top">
                     <InfoTitle>감독</InfoTitle>
                     <InfoBody>{director}</InfoBody>
                 </InfoBox>
-                <InfoBox InfoBoxPositon="Middle">
+                <InfoBox infoboxposition="Middle">
                     <InfoTitle>장르</InfoTitle>
                     <InfoBody>{genres.join(", ")}</InfoBody>
                 </InfoBox>
-                <InfoBox InfoBoxPositon="Bottom">
+                <InfoBox infoboxposition="Bottom">
                     <InfoTitle>출연진</InfoTitle>
                     <InfoBody>{actors.join(", ")}</InfoBody>
                 </InfoBox>
